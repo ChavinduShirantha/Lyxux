@@ -24,4 +24,9 @@ public class ItemController {
         service.saveItem(dto);
         return new ResponseUtil("Ok", "Successfully Added", null);
     }
+
+    @GetMapping
+    public ResponseUtil getAllItems() {
+        return new ResponseUtil("Ok", "Successfully Loaded", service.getAllItems());
+    }
 }

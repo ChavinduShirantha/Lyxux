@@ -5,12 +5,14 @@ import lk.wendy.entity.Item;
 import lk.wendy.repo.ItemRepo;
 import lk.wendy.service.ItemService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author : Chavindu
@@ -47,5 +49,12 @@ public class ItemServiceImpl implements ItemService {
         }
 
         System.out.println(item);
+    }
+
+    @Override
+    public List<ItemDTO> getAllItems() {
+        List<Item> all = repo.findAll();
+        return mapper.map(all, new TypeToken<List<ItemDTO>>() {
+        }.getType());
     }
 }
