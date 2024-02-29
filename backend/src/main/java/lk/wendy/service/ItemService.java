@@ -12,4 +12,7 @@ import java.util.List;
 public interface ItemService {
     void saveItem(ItemDTO dto);
     List<ItemDTO> getAllItems();
+    ItemDTO findItem(String id);
+    void updateItem(ItemDTO dto);
+    void deleteItem(String id);
 }

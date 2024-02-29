@@ -29,4 +29,22 @@ public class ItemController {
     public ResponseUtil getAllItems() {
         return new ResponseUtil("Ok", "Successfully Loaded", service.getAllItems());
     }
+
+    @GetMapping(params = {"id"})
+    public ResponseUtil findCar(String id) {
+        return new ResponseUtil("Ok", "Successfully Loaded", service.findItem(id));
+    }
+
+    @PostMapping(path = {"update"})
+    public ResponseUtil updateCar(@ModelAttribute ItemDTO dto) {
+        service.updateItem(dto);
+        return new ResponseUtil("Ok", "Successfully Updated", null);
+    }
+
+    @DeleteMapping(params = {"id"})
+    public ResponseUtil deleteCar(String id) {
+        service.deleteItem(id);
+        return new ResponseUtil("Ok", "Successfully Deleted", null);
+    }
+
 }
