@@ -1,6 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBagShopping, faCircleDollarToSlot} from "@fortawesome/free-solid-svg-icons";
 import money from '../../../images/pic.jpg'
+import pic2 from '../../../images/pic2.png'
 
 export const Dashboard = () => {
     return (
@@ -27,7 +28,7 @@ export const Dashboard = () => {
                         <div className="flex">
                             <div className="bg-gray-200 w-24 h-24 justify-center items-center"
                                  style={{borderRadius: '100%'}}>
-                                <img className="h-8 mx-auto my-auto  mt-8" src={money}
+                                <img className="h-8 mx-auto my-auto  mt-8" src={pic2}
                                      alt=""/>
                             </div>
                             <div className="flex flex-wrap">
@@ -41,3 +42,4 @@ export const Dashboard = () => {
         </>
     )
 }
+
