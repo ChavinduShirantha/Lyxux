@@ -19,6 +19,9 @@ import report from '../../../images/report.png'
 import print from '../../../images/print.png'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDashboard} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
 export const ManageItems = () => {
     const Search = styled('div')(({theme}) => ({
@@ -66,9 +69,11 @@ export const ManageItems = () => {
                     <h4 className="text-md">Manage Your Products</h4>
                 </div>
                 <div className="float-right w-1/2 text-right">
-                    <button className="pl-4 pr-4 pt-2 pb-2 mr-5 bg-orange-300 text-white font-bold rounded">
-                        <AddIcon/> Add New Product
-                    </button>
+                    <Link to="/addItem">
+                        <button className="pl-4 pr-4 pt-2 pb-2 mr-5 bg-orange-300 text-white font-bold rounded">
+                            <AddIcon/> Add New Product
+                        </button>
+                    </Link>
                 </div>
             </div>
             <div className="flex flex-wrap w-full p-5 mt-6 h-fit bg-white">
