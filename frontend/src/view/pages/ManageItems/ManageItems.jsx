@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import AddIcon from '@mui/icons-material/Add';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import {styled, alpha} from '@mui/material/styles';
@@ -22,6 +22,11 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDashboard} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {ProductTable} from "../ProductTable/ProductTable";
+
+const baseURL = 'http://localhost:8080/backend_war/manageItem';
+
 
 export const ManageItems = () => {
     const Search = styled('div')(({theme}) => ({
@@ -60,6 +65,26 @@ export const ManageItems = () => {
         },
     }));
 
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        getAll();
+    }, []);
+
+    const getAll = async () => fetchData('/all');
+
+    const fetchData = async (endpoint) => {
+        try {
+            const response = await axios.get(baseURL + endpoint);
+            if (response.data.length === 0) {
+                alert('No data found');
+            } else {
+                setData(response.data);
+            }
+        } catch (error) {
+            alert(`Error: ${error.response?.data?.error || error.message}`);
+        }
+    };
 
     return (
         <div className="flex flex-wrap p-5">
@@ -98,39 +123,7 @@ export const ManageItems = () => {
                     <img className="h-8 mt-1" src={print} alt=""/>
                 </div>
             </div>
-            <TableContainer component={Paper}>
-                <Table sx={{minWidth: 650}} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="center">Product Name</TableCell>
-                            <TableCell align="center">SKU</TableCell>
-                            <TableCell align="center">Category</TableCell>
-                            <TableCell align="center">Brand</TableCell>
-                            <TableCell align="center">Price</TableCell>
-                            <TableCell align="center">Unit</TableCell>
-                            <TableCell align="center">Qty</TableCell>
-                            <TableCell align="center">Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <TableRow
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                            <TableCell component="th" scope="row" align="center">
-                            </TableCell>
-                            <TableCell component="th" scope="row" align="center"></TableCell>
-                            <TableCell align="center"></TableCell>
-                            <TableCell align="center"></TableCell>
-                            <TableCell align="center"></TableCell>
-                            <TableCell align="center"></TableCell>
-                            <TableCell align="center"></TableCell>
-                            <TableCell align="center">
-                                <Button startIcon={<BorderColorOutlinedIcon className="text-black"/>}></Button>
-                                <Button startIcon={<DeleteForeverOutlinedIcon className="text-red-600"/>}></Button>
-                            </TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <ProductTable data={data} />
         </div>
     )
 }

@@ -25,7 +25,7 @@ public class ItemController {
         return new ResponseUtil("Ok", "Successfully Added", null);
     }
 
-    @GetMapping
+    @GetMapping(path={"all"})
     public ResponseUtil getAllItems() {
         return new ResponseUtil("Ok", "Successfully Loaded", service.getAllItems());
     }
