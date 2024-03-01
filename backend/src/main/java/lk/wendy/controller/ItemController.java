@@ -19,8 +19,8 @@ public class ItemController {
     ItemService service;
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping
-    public ResponseUtil saveItem(@ModelAttribute ItemDTO dto) {
+    @PostMapping(path = {"save"})
+    public ResponseUtil saveItem(@RequestBody ItemDTO dto) {
         service.saveItem(dto);
         return new ResponseUtil("Ok", "Successfully Added", null);
     }

@@ -25,5 +25,5 @@ public class ItemDTO {
     private int qty;
     private String description;
     private double price;
-    private MultipartFile product_image;
+//    private MultipartFile product_image;
 }

@@ -28,7 +28,14 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void saveItem(ItemDTO dto) {
-        Item item = new Item(dto.getSku(), dto.getProductName(), dto.getCategory(), dto.getSub_category(), dto.getBrand(), dto.getUnit(), dto.getMinimum_qty(), dto.getQty(), dto.getDescription(), dto.getPrice(), "");
+       Item item = mapper.map(dto, Item.class);
+        if (repo.existsById(dto.getSku())) {
+            throw new RuntimeException(dto.getSku() + " is already available, please insert a new ID");
+        }
+
+        System.out.println(item);
+        repo.save(item);
+        /*Item item = new Item(dto.getSku(), dto.getProductName(), dto.getCategory(), dto.getSub_category(), dto.getBrand(), dto.getUnit(), dto.getMinimum_qty(), dto.getQty(), dto.getDescription(), dto.getPrice(), "");
         if (repo.existsById(dto.getSku()))
             throw new RuntimeException(dto.getSku() + " is already available, please insert a new ID");
 
@@ -49,7 +56,7 @@ public class ItemServiceImpl implements ItemService {
             throw new RuntimeException(e);
         }
 
-        System.out.println(item);
+        System.out.println(item);*/
     }
 
     @Override
@@ -70,7 +77,14 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void updateItem(ItemDTO dto) {
-        Item item = new Item(dto.getSku(), dto.getProductName(), dto.getCategory(), dto.getSub_category(), dto.getBrand(), dto.getUnit(), dto.getMinimum_qty(), dto.getQty(), dto.getDescription(), dto.getPrice(), "");
+        Item item = mapper.map(dto, Item.class);
+        if (!repo.existsById(dto.getSku())) {
+            throw new RuntimeException(dto.getSku() + " is already available, please insert a new ID");
+        }
+
+        System.out.println(item);
+        repo.save(item);
+        /*Item item = new Item(dto.getSku(), dto.getProductName(), dto.getCategory(), dto.getSub_category(), dto.getBrand(), dto.getUnit(), dto.getMinimum_qty(), dto.getQty(), dto.getDescription(), dto.getPrice(), "");
         if (!repo.existsById(dto.getSku()))
             throw new RuntimeException(dto.getSku() + " is not available, please insert a new ID");
 
@@ -90,7 +104,7 @@ public class ItemServiceImpl implements ItemService {
         }
 
         System.out.println(item);
-        repo.save(item);
+        repo.save(item);*/
     }
 
     @Override

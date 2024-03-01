@@ -29,5 +29,5 @@ public class Item {
     private int qty;
     private String description;
     private double price;
-    private String product_image;
+//    private String product_image;
 }
