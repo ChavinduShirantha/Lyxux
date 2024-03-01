@@ -3,12 +3,22 @@ import AddIcon from '@mui/icons-material/Add';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import {styled, alpha} from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import {InputBase} from "@mui/material";
+import {
+    Button,
+    InputBase,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow
+} from "@mui/material";
 import pdf from '../../../images/pdf.png'
 import report from '../../../images/report.png'
 import print from '../../../images/print.png'
-import pic2 from "../../../images/pic2.png";
-import {DataGrid} from "@mui/x-data-grid";
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 
 export const ManageItems = () => {
     const Search = styled('div')(({theme}) => ({
@@ -47,39 +57,6 @@ export const ManageItems = () => {
         },
     }));
 
-    const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'firstName', headerName: 'First name', width: 130 },
-        { field: 'lastName', headerName: 'Last name', width: 130 },
-        {
-            field: 'age',
-            headerName: 'Age',
-            type: 'number',
-            width: 90,
-        },
-        {
-            field: 'fullName',
-            headerName: 'Full name',
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
-            width: 160,
-            valueGetter: (params) =>
-                `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-        },
-    ];
-
-    const rows = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-        { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-        { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-        { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-        { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-        { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-        { id: 10, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    ];
 
     return (
         <div className="flex flex-wrap p-5">
@@ -116,18 +93,39 @@ export const ManageItems = () => {
                     <img className="h-8 mt-1" src={print} alt=""/>
                 </div>
             </div>
-            <div className="mb-5" style={{height: 650, width: '100%'}}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {page: 0, pageSize: 10},
-                        },
-                    }}
-                    checkboxSelection
-                />
-            </div>
+            <TableContainer component={Paper}>
+                <Table sx={{minWidth: 650}} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="center">Product Name</TableCell>
+                            <TableCell align="center">SKU</TableCell>
+                            <TableCell align="center">Category</TableCell>
+                            <TableCell align="center">Brand</TableCell>
+                            <TableCell align="center">Price</TableCell>
+                            <TableCell align="center">Unit</TableCell>
+                            <TableCell align="center">Qty</TableCell>
+                            <TableCell align="center">Action</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                            <TableCell component="th" scope="row" align="center">
+                            </TableCell>
+                            <TableCell component="th" scope="row" align="center"></TableCell>
+                            <TableCell align="center"></TableCell>
+                            <TableCell align="center"></TableCell>
+                            <TableCell align="center"></TableCell>
+                            <TableCell align="center"></TableCell>
+                            <TableCell align="center"></TableCell>
+                            <TableCell align="center">
+                                <Button startIcon={<BorderColorOutlinedIcon className="text-black"/>}></Button>
+                                <Button startIcon={<DeleteForeverOutlinedIcon className="text-red-600"/>}></Button>
+                            </TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 }
